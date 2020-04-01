@@ -26,6 +26,14 @@ module.exports = {
         type: DataTypes.STRING,
         select: false,
       },
+      passwordResetToken: {
+        type: DataTypes.STRING,
+        select: false,
+      },
+      passwordResetExpires: {
+        type: DataTypes.DATE,
+        default: Date.now(),
+      },
       createdAt: {
         allowNull: false,
         type: DataTypes.DATE,

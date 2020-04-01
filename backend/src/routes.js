@@ -30,4 +30,18 @@ routes.post('/authenticate', celebrate({
   })
 }), UserController.authenticate);
 
+routes.post('/forgot_password', celebrate({
+  [Segments.BODY]: Joi.object().keys({
+    email: Joi.string().required().email()
+  })
+}), UserController.forgotPassword);
+
+routes.post('/reset_password', celebrate({
+  [Segments.BODY]: Joi.object().keys({
+    token: Joi.string().required(),
+    email: Joi.string().required().email(),
+    password: Joi.string().required().min(5)
+  })
+}), UserController.resetPassword);
+
 module.exports = routes;
