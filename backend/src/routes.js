@@ -5,9 +5,11 @@ const UserController = require('./controllers/UserController');
 
 const routes = express.Router();
 
-routes.get('/', (req, res) => {
-  res.send('Hello Oova yea yea yaaaa');
-});
+routes.get('/profile/:id', celebrate({
+  [Segments.PARAMS]: Joi.object().keys({
+    id: Joi.string().required(),
+  })
+}), UserController.profile),
 
 routes.post('/users', celebrate({
   [Segments.BODY]: Joi.object().keys({
