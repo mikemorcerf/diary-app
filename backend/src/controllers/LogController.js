@@ -18,15 +18,47 @@ function moodIsValid( params = '' ){
   };
 };
 
+function filterTypeIsValid ( params = '' ){
+  switch(params) {
+    //Greater than or equal
+    case 'gte':
+      return true;
+    //Less than or equal
+    case 'lte':
+      return true;
+    default:
+      return false;
+  };
+};
+
+function createOperatorFilter( filterType, filterValue ){
+  switch(filterType) {
+    //Greater than or equal
+    case 'gte':
+      return { [Op.gte]: filterValue };
+    //Less than or equal
+    case 'lte':
+      return { [Op.lte]: filterValue };;
+    default:
+      return {};
+  };
+};
+
 function invalidMoodError() {
   return {error:'Invalid mood entry.'};
 };
+
+//index filters available:
+//moodFilter: Takes a string containing which mood user wants to use as a filter
 
 module.exports = {
   async index(req, res) {
     const { page=1 } = req.query;
     const { userId } = req;
-    let { moodFilter } = req.query;
+    let { moodFilter,
+      exerciseTimeFilter, exerciseTimeFilterType 
+    } = req.query;
+
     let whereParams = { userId: userId };
     
     // If there is a moodFilter, check whether it is valid. If yes, add it to the query whereParams
@@ -37,6 +69,19 @@ module.exports = {
       } else {
         whereParams.mood = moodFilter;
       };
+    };
+
+    // exerciseTimeFilter
+    if(exerciseTimeFilter){
+      if(!exerciseTimeFilterType){
+        return res.status(400).json({error: 'Missing exerciseTimeFilterType.'});
+      };
+      //Check whether exerciseTimeFilterType is valid
+      exerciseTimeFilterType = exerciseTimeFilterType.toLowerCase();
+      if(!filterTypeIsValid(exerciseTimeFilterType)){
+        return res.status(400).json({error: 'Invalid exerciseTimeFilterType.'});
+      };
+      whereParams.exerciseTime = createOperatorFilter(exerciseTimeFilterType, exerciseTimeFilter);
     };
 
     const { rows, count } = await Log.findAndCountAll({
