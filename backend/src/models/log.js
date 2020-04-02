@@ -8,8 +8,6 @@ module.exports = (sequelize, DataTypes) => {
     vitaminTaken: DataTypes.BOOLEAN,
     energyLevel: DataTypes.INTEGER,
     sleepQuality: DataTypes.INTEGER,
-    createdAt: DataTypes.DATE,
-    updatedAt: DataTypes.DATE
   }, {});
   Log.associate = function(models) {
     Log.belongsTo(models.User, {foreignKey: 'userId'})
