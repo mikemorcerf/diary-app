@@ -3,6 +3,7 @@ const { celebrate, Segments, Joi } = require('celebrate');
 const authMiddleware = require('../middlewares/auth');
 
 const UserController = require('./controllers/UserController');
+const LogController = require('./controllers/LogController');
 
 const routes = express.Router();
 routes.use('/profile', authMiddleware);
@@ -43,5 +44,17 @@ routes.post('/reset_password', celebrate({
     password: Joi.string().required().min(5)
   })
 }), UserController.resetPassword);
+
+// Routes for Logs
+routes.post('/profile/new_log', celebrate({
+  [Segments.BODY]: Joi.object().keys({
+    calorieIntake: Joi.number().required(),
+    exerciseTime: Joi.number().required(),
+    mood: Joi.string().required(),
+    vitaminTaken: Joi.boolean().required(),
+    energyLevel: Joi.number().required(),
+    sleepQuality: Joi.number().required(),
+  })
+}), LogController.create);
 
 module.exports = routes;
