@@ -7,6 +7,8 @@ module.exports = (sequelize, DataTypes) => {
     password: DataTypes.STRING,
     passwordResetToken: DataTypes.STRING,
     passwordResetExpires: DataTypes.DATE,
+    passwordResetToken: DataTypes.STRING,
+    passwordResetExpires: DataTypes.DATE
   });
   User.associate = function(models) {
     User.hasMany(models.Log, {as: 'logs'})
