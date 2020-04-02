@@ -1,3 +1,4 @@
+'use strict';
 module.exports = (sequelize, DataTypes) => {
   const User = sequelize.define('User', {
     firstName: DataTypes.STRING,
@@ -7,6 +8,8 @@ module.exports = (sequelize, DataTypes) => {
     passwordResetToken: DataTypes.STRING,
     passwordResetExpires: DataTypes.DATE,
   });
-
+  User.associate = function(models) {
+    User.hasMany(models.Log, {as: 'logs'})
+  };
   return User;
 }
