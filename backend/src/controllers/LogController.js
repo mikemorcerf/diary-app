@@ -4,6 +4,25 @@ const moment = require('moment');
 const Op = Sequelize.Op;
 
 module.exports = {
+  async index(req, res) {
+    const { page=1 } = req.query;
+    const { userId } = req;
+
+    const { rows, count } = await Log.findAndCountAll({
+      attributes: { exclude: ['UserId'] },
+      where: {
+        userId: userId,
+      },
+      limit: 5,
+      offset:((page-1)*5),
+     }
+    );
+
+    res.header('X-Total-Count', count);
+
+    return res.json(rows);
+  },
+
   async create(req, res) {
     const { userId } = req;
     const { calorieIntake, exerciseTime, vitaminTaken, energyLevel, sleepQuality } = req.body;
@@ -19,7 +38,7 @@ module.exports = {
       case 'annoyed':
         break;
       default:
-        res.status(400).json({error:'Invalid mood entry.'});
+        return res.status(400).json({error:'Invalid mood entry.'});
     }
 
     try{
@@ -33,8 +52,8 @@ module.exports = {
         },
       });
       if(lastEntry){
-        res.status(400).json({error:'Only one diary entry allowed per day'});
-      }
+        return res.status(400).json({error:'Only one diary entry allowed per day'});
+      };
       const newEntry = await Log.create({
         userId: userId,
         calorieIntake,
@@ -47,9 +66,10 @@ module.exports = {
       res.json(newEntry);
     } catch (err) {
       console.log(err);
-      res.status(400).json({ error: 'Error creating new diary log.' });
+      return res.status(400).json({ error: 'Error creating new diary log.' });
     };
   },
+
 
   // userId: DataTypes.STRING,
   // calorieIntake: DataTypes.FLOAT,

@@ -9,7 +9,7 @@ const routes = express.Router();
 routes.use('/profile', authMiddleware);
 
 // Routes to Users
-routes.get('/profile/', celebrate({
+routes.get('/profile', celebrate({
   [Segments.HEADERS]: Joi.object({
     authorization: Joi.string().required(),
   }).unknown(),
@@ -45,8 +45,18 @@ routes.post('/reset_password', celebrate({
   })
 }), UserController.resetPassword);
 
-// Routes for Logs
-routes.post('/profile/new_log', celebrate({
+
+
+
+
+// Routes to Logs
+routes.get('/profile/logs', celebrate({
+  [Segments.QUERY]: Joi.object().keys({
+    page: Joi.number()
+  })
+}), LogController.index);
+
+routes.post('/profile/logs', celebrate({
   [Segments.BODY]: Joi.object().keys({
     calorieIntake: Joi.number().required(),
     exerciseTime: Joi.number().required(),
