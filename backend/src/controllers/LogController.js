@@ -58,7 +58,9 @@ module.exports = {
     let { 
       moodFilter,
       exerciseTimeFilter, exerciseTimeFilterType,
-      vitaminTakenFilter
+      vitaminTakenFilter,
+      energyLevelFilter, energyLevelFilterType,
+      sleepQualityFilter, sleepQualityFilterType
     } = req.query;
 
     let whereParams = { userId: userId };
@@ -91,7 +93,34 @@ module.exports = {
       whereParams.vitaminTaken = vitaminTakenFilter;
     };
 
+    // If there is an energyLevelFilter, check whether it is valid. If yes, add it to the query whereParams
+    if(energyLevelFilter){
+      if(!energyLevelFilterType){
+        return res.status(400).json({error: 'Missing energyLevelFilterType.'});
+      };
+      //Check whether energyLevelFilterType is valid
+      energyLevelFilterType = energyLevelFilterType.toLowerCase();
+      if(!filterTypeIsValid(energyLevelFilterType)){
+        return res.status(400).json({error: 'Invalid energyLevelFilterType.'});
+      };
+      whereParams.energyLevel = createOperatorFilter(energyLevelFilterType, energyLevelFilter);
+    };
+
+    // If there is a sleepQualityFilter, check whether is is valid. If yes, add it to the query whereParams
+    if(sleepQualityFilter){
+      if(!sleepQualityFilterType){
+        return res.status(400).json({error: 'Missing sleepQualityFilterType.'});
+      };
+      //Check whether sleepQualityFilterType is valid
+      sleepQualityFilterType = sleepQualityFilterType.toLowerCase();
+      if(!filterTypeIsValid(sleepQualityFilterType)){
+        return res.status(400).json({error: 'Invalid sleepQualityFilterType.'});
+      };
+      whereParams.sleepQuality = createOperatorFilter(sleepQualityFilterType, sleepQualityFilter);
+    };
+
     const { rows, count } = await Log.findAndCountAll({
+      order: [['id', 'DESC']],
       attributes: { exclude: ['UserId'] },
       where: whereParams,
       limit: 5,

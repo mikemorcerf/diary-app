@@ -54,9 +54,13 @@ routes.get('/profile/logs', celebrate({
   [Segments.QUERY]: Joi.object().keys({
     page: Joi.number().required(),
     moodFilter: Joi.string(),
-    exerciseTimeFilter: Joi.number(),
+    exerciseTimeFilter: Joi.number().min(0.001).max(24.0),
     exerciseTimeFilterType: Joi.string().length(3),
-    vitaminTakenFilter: Joi.boolean()
+    vitaminTakenFilter: Joi.boolean(),
+    energyLevelFilter: Joi.number().min(1).max(5),
+    energyLevelFilterType: Joi.string().length(3),
+    sleepQualityFilter: Joi.number().min(1).max(5),
+    sleepQualityFilterType: Joi.string().length(3)
   })
 }), LogController.index);
 
