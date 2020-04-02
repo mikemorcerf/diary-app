@@ -55,8 +55,10 @@ module.exports = {
   async index(req, res) {
     const { page=1 } = req.query;
     const { userId } = req;
-    let { moodFilter,
-      exerciseTimeFilter, exerciseTimeFilterType 
+    let { 
+      moodFilter,
+      exerciseTimeFilter, exerciseTimeFilterType,
+      vitaminTakenFilter
     } = req.query;
 
     let whereParams = { userId: userId };
@@ -71,7 +73,7 @@ module.exports = {
       };
     };
 
-    // exerciseTimeFilter
+    // If there is a exerciseTimeFilter, check whether it is valid. If yes, add it to the query whereParams
     if(exerciseTimeFilter){
       if(!exerciseTimeFilterType){
         return res.status(400).json({error: 'Missing exerciseTimeFilterType.'});
@@ -82,6 +84,11 @@ module.exports = {
         return res.status(400).json({error: 'Invalid exerciseTimeFilterType.'});
       };
       whereParams.exerciseTime = createOperatorFilter(exerciseTimeFilterType, exerciseTimeFilter);
+    };
+
+    // If there is a vitaminTakenFilter, add it to the query whereParams
+    if(vitaminTakenFilter===true || vitaminTakenFilter===false){
+      whereParams.vitaminTaken = vitaminTakenFilter;
     };
 
     const { rows, count } = await Log.findAndCountAll({

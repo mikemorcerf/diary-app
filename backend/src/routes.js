@@ -55,7 +55,8 @@ routes.get('/profile/logs', celebrate({
     page: Joi.number().required(),
     moodFilter: Joi.string(),
     exerciseTimeFilter: Joi.number(),
-    exerciseTimeFilterType: Joi.string().length(3)
+    exerciseTimeFilterType: Joi.string().length(3),
+    vitaminTakenFilter: Joi.boolean()
   })
 }), LogController.index);
 
