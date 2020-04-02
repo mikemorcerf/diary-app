@@ -10,7 +10,7 @@ function generateToken(params = {}){
     //token will expire in one week
     expiresIn: 604800,
   });
-}
+};
 
 module.exports = {
   async create(req, res) {

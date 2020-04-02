@@ -52,7 +52,8 @@ routes.post('/reset_password', celebrate({
 // Routes to Logs
 routes.get('/profile/logs', celebrate({
   [Segments.QUERY]: Joi.object().keys({
-    page: Joi.number()
+    page: Joi.number(),
+    moodFilter: Joi.string()
   })
 }), LogController.index);
 
