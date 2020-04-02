@@ -1,3 +1,8 @@
+// Diary app API
+// Author: Michael de Morcerf e Moura
+// LinkedIn: https://www.linkedin.com/in/michaelmoura/
+// Github: https://github.com/mikemorcerf
+
 const express = require('express');
 const { celebrate, Segments, Joi } = require('celebrate');
 const authMiddleware = require('../middlewares/auth');
@@ -60,7 +65,9 @@ routes.get('/profile/logs', celebrate({
     energyLevelFilter: Joi.number().min(1).max(5),
     energyLevelFilterType: Joi.string().length(3),
     sleepQualityFilter: Joi.number().min(1).max(5),
-    sleepQualityFilterType: Joi.string().length(3)
+    sleepQualityFilterType: Joi.string().length(3),
+    filterOrderAttribute: Joi.string(),
+    filterOrder: Joi.string().min(3).max(4)
   })
 }), LogController.index);
 

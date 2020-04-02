@@ -1,6 +1,10 @@
+// Diary app API
+// Author: Michael de Morcerf e Moura
+// LinkedIn: https://www.linkedin.com/in/michaelmoura/
+// Github: https://github.com/mikemorcerf
+
 const { Log } = require('../models/');
 const Sequelize = require('sequelize');
-const moment = require('moment');
 const Op = Sequelize.Op;
 
 function moodIsValid( params = '' ){
@@ -12,6 +16,23 @@ function moodIsValid( params = '' ){
     case 'sad':
       return true;
     case 'annoyed':
+      return true;
+    default:
+      return false;
+  };
+};
+
+function attributeIsValid( params = '' ){
+  switch(params) {
+    case 'calorieIntake':
+      return true;
+    case 'exerciseTime':
+      return true;
+    case 'vitaminTaken':
+      return true;
+    case 'energyLevel':
+      return true;
+    case 'sleepQuality':
       return true;
     default:
       return false;
@@ -48,9 +69,6 @@ function invalidMoodError() {
   return {error:'Invalid mood entry.'};
 };
 
-//index filters available:
-//moodFilter: Takes a string containing which mood user wants to use as a filter
-
 module.exports = {
   async index(req, res) {
     const { page=1 } = req.query;
@@ -60,10 +78,26 @@ module.exports = {
       exerciseTimeFilter, exerciseTimeFilterType,
       vitaminTakenFilter,
       energyLevelFilter, energyLevelFilterType,
-      sleepQualityFilter, sleepQualityFilterType
+      sleepQualityFilter, sleepQualityFilterType,
+      filterOrderAttribute = 'id', filterOrder = 'DESC'
     } = req.query;
 
     let whereParams = { userId: userId };
+
+    // filterOrderAttribute is id by default. In case it is changed, check whether it is valid
+    if(filterOrderAttribute!=='id'){
+      if(!attributeIsValid(filterOrderAttribute)){
+        res.status(400).json({error:'Wrong filterOrderAttribute. Please check spelling as attribute is case sensitive.'});
+      };
+    };
+
+    // filterOrder is DESC (Descending) by default. In case it is changed, check whether it is valid
+    if(filterOrder!=='DESC'){
+      filterOrder = filterOrder.toUpperCase();
+      if(filterOrder!=='DESC' && filterOrder!=='ASC'){
+        return res.status(400).json({error: 'Invalid value for filterOrder. Must be DESC (Descending) or ASC (Ascending).'});
+      };
+    };
     
     // If there is a moodFilter, check whether it is valid. If yes, add it to the query whereParams
     if(moodFilter){
@@ -120,7 +154,7 @@ module.exports = {
     };
 
     const { rows, count } = await Log.findAndCountAll({
-      order: [['id', 'DESC']],
+      order: [[filterOrderAttribute, filterOrder]],
       attributes: { exclude: ['UserId'] },
       where: whereParams,
       limit: 5,
@@ -170,16 +204,5 @@ module.exports = {
       return res.status(400).json(invalidMoodError());
     };
   },
-
-
-  // userId: DataTypes.STRING,
-  // calorieIntake: DataTypes.FLOAT,
-  // exerciseTime: DataTypes.FLOAT,
-  // mood: DataTypes.STRING,
-  // vitaminTaken: DataTypes.BOOLEAN,
-  // energyLevel: DataTypes.INTEGER,
-  // sleepQuality: DataTypes.INTEGER,
-  // createdAt: DataTypes.DATE,
-  // updatedAt: DataTypes.DATE
 
 };

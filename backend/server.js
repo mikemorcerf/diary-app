@@ -1,3 +1,8 @@
+// Diary app API
+// Author: Michael de Morcerf e Moura
+// LinkedIn: https://www.linkedin.com/in/michaelmoura/
+// Github: https://github.com/mikemorcerf
+
 const express = require('express');
 const bodyParser = require('body-parser');
 

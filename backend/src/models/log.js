@@ -1,3 +1,8 @@
+// Diary app API
+// Author: Michael de Morcerf e Moura
+// LinkedIn: https://www.linkedin.com/in/michaelmoura/
+// Github: https://github.com/mikemorcerf
+
 'use strict';
 module.exports = (sequelize, DataTypes) => {
   const Log = sequelize.define('Log', {

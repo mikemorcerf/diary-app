@@ -1,3 +1,8 @@
+// Diary app API
+// Author: Michael de Morcerf e Moura
+// LinkedIn: https://www.linkedin.com/in/michaelmoura/
+// Github: https://github.com/mikemorcerf
+
 const { User } = require('../models/');
 const generateUniqueId = require('../utils/generateUniqueId');
 const bcrypt = require('bcryptjs');
