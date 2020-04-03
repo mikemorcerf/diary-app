@@ -59,7 +59,7 @@ function createOperatorFilter( filterType, filterValue ){
       return { [Op.gte]: filterValue };
     //Less than or equal
     case 'lte':
-      return { [Op.lte]: filterValue };;
+      return { [Op.lte]: filterValue };
     default:
       return {};
   };
@@ -195,7 +195,7 @@ module.exports = {
           energyLevel,
           sleepQuality,
         });
-        res.json(newEntry);
+        return res.status(201).json(newEntry);
       } catch (err) {
         console.log(err);
         return res.status(400).json({ error: 'Error creating new diary log.' });
@@ -205,4 +205,28 @@ module.exports = {
     };
   },
 
+  async delete(req, res) {
+    const { userId } = req;
+    const { id } = req.params;
+
+    try{
+      const logToDelete = await Log.findOne({
+        attributes: { exclude: ['UserId'] },
+        where: {
+          userId: userId,
+          id: id,
+        },
+      });
+
+      if(!logToDelete){
+        return res.status(400).json({error:'Record not found, or user does not have permission to delete this record.'});
+      };
+
+      await logToDelete.destroy();
+      return res.status(204).send();
+
+    } catch (err) {
+      return res.status(400).json({error:'Error deleting log entry.'});
+    };
+  },
 };

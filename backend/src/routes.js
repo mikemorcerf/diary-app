@@ -57,7 +57,7 @@ routes.post('/reset_password', celebrate({
 // Routes to Logs
 routes.get('/profile/logs', celebrate({
   [Segments.QUERY]: Joi.object().keys({
-    page: Joi.number().required(),
+    page: Joi.number().min(1).required(),
     moodFilter: Joi.string(),
     exerciseTimeFilter: Joi.number().min(0.001).max(24.0),
     exerciseTimeFilterType: Joi.string().length(3),
@@ -78,8 +78,14 @@ routes.post('/profile/logs', celebrate({
     mood: Joi.string().required(),
     vitaminTaken: Joi.boolean().required(),
     energyLevel: Joi.number().required(),
-    sleepQuality: Joi.number().required(),
+    sleepQuality: Joi.number().required()
   })
 }), LogController.create);
+
+routes.delete('/profile/logs/:id', celebrate({
+  [Segments.PARAMS]: Joi.object().keys({
+    id: Joi.number().required(),
+  })
+}), LogController.delete);
 
 module.exports = routes;
