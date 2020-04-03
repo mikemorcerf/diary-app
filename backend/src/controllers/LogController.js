@@ -69,6 +69,8 @@ function invalidMoodError() {
   return {error:'Invalid mood entry.'};
 };
 
+
+
 module.exports = {
   async index(req, res) {
     const { page=1 } = req.query;
@@ -79,6 +81,7 @@ module.exports = {
       vitaminTakenFilter,
       energyLevelFilter, energyLevelFilterType,
       sleepQualityFilter, sleepQualityFilterType,
+      calorieIntakeFilter, calorieIntakeFilterType,
       filterOrderAttribute = 'id', filterOrder = 'DESC'
     } = req.query;
 
@@ -120,6 +123,19 @@ module.exports = {
         return res.status(400).json({error: 'Invalid exerciseTimeFilterType.'});
       };
       whereParams.exerciseTime = createOperatorFilter(exerciseTimeFilterType, exerciseTimeFilter);
+    };
+
+////    // If there is a calorieIntakeFilter, check whether it is valid. If yes, add it to the query whereParams
+    if(calorieIntakeFilter){
+      if(!calorieIntakeFilterType){
+        return res.status(400).json({error: 'Missing calorieIntakeFilterType.'});
+      };
+      //Check whether calorieIntakeFilterType is valid
+      calorieIntakeFilterType = calorieIntakeFilterType.toLowerCase();
+      if(!filterTypeIsValid(calorieIntakeFilterType)){
+        return res.status(400).json({error: 'Invalid calorieIntakeFilterType.'});
+      };
+      whereParams.exerciseTime = createOperatorFilter(calorieIntakeFilterType, calorieIntakeFilter);
     };
 
     // If there is a vitaminTakenFilter, add it to the query whereParams
@@ -167,6 +183,8 @@ module.exports = {
     return res.json(rows);
   },
 
+
+
   async create(req, res) {
     const { userId } = req;
     const { calorieIntake, exerciseTime, vitaminTaken, energyLevel, sleepQuality } = req.body;
@@ -205,6 +223,8 @@ module.exports = {
     };
   },
 
+
+
   async delete(req, res) {
     const { userId } = req;
     const { id } = req.params;
@@ -227,6 +247,42 @@ module.exports = {
 
     } catch (err) {
       return res.status(400).json({error:'Error deleting log entry.'});
+    };
+  },
+
+
+
+  async update(req, res) {
+    const { userId } = req;
+    const { id } = req.params;
+    const { calorieIntake, exerciseTime, mood, vitaminTaken, energyLevel, sleepQuality } = req.body;
+
+    try {
+      const logToUpdate = await Log.findOne({
+        attributes: { exclude: ['UserId'] },
+        where: {
+          userId: userId,
+          id: id,
+        },
+      });
+
+      if(!logToUpdate){
+        return res.status(400).json({error:'Record not found, or user does not have permission to update this record.'});
+      };
+
+      if (calorieIntake) { logToUpdate.calorieIntake = calorieIntake};
+      if (exerciseTime) { logToUpdate.exerciseTime = exerciseTime};
+      if (vitaminTaken) { logToUpdate.vitaminTaken = vitaminTaken};
+      if (energyLevel) { logToUpdate.energyLevel = energyLevel};
+      if (sleepQuality) { logToUpdate.sleepQuality = sleepQuality};
+      if (mood) { logToUpdate.mood = mood};
+
+      await logToUpdate.save();
+
+      return res.json(logToUpdate);
+
+    } catch (err) {
+      return res.status(400).json({ error: 'Error updating record.' });
     };
   },
 };

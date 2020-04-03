@@ -58,7 +58,7 @@ routes.post('/reset_password', celebrate({
 routes.get('/profile/logs', celebrate({
   [Segments.QUERY]: Joi.object().keys({
     page: Joi.number().min(1).required(),
-    moodFilter: Joi.string(),
+    moodFilter: Joi.string().min(3).max(7),
     exerciseTimeFilter: Joi.number().min(0.001).max(24.0),
     exerciseTimeFilterType: Joi.string().length(3),
     vitaminTakenFilter: Joi.boolean(),
@@ -66,6 +66,8 @@ routes.get('/profile/logs', celebrate({
     energyLevelFilterType: Joi.string().length(3),
     sleepQualityFilter: Joi.number().min(1).max(5),
     sleepQualityFilterType: Joi.string().length(3),
+    calorieIntakeFilter: Joi.number().required().min(0.1).max(35000.0),
+    calorieIntakeFilterType: Joi.string().length(3),
     filterOrderAttribute: Joi.string(),
     filterOrder: Joi.string().min(3).max(4)
   })
@@ -73,12 +75,12 @@ routes.get('/profile/logs', celebrate({
 
 routes.post('/profile/logs', celebrate({
   [Segments.BODY]: Joi.object().keys({
-    calorieIntake: Joi.number().required(),
-    exerciseTime: Joi.number().required(),
-    mood: Joi.string().required(),
+    calorieIntake: Joi.number().required().min(0.1).max(35000.0),
+    exerciseTime: Joi.number().required().min(0.001).max(24.0),
+    mood: Joi.string().required().min(3).max(7),
     vitaminTaken: Joi.boolean().required(),
-    energyLevel: Joi.number().required(),
-    sleepQuality: Joi.number().required()
+    energyLevel: Joi.number().required().min(1).max(5),
+    sleepQuality: Joi.number().required().min(1).max(5)
   })
 }), LogController.create);
 
@@ -87,5 +89,19 @@ routes.delete('/profile/logs/:id', celebrate({
     id: Joi.number().required(),
   })
 }), LogController.delete);
+
+routes.patch('/profile/logs/:id', celebrate({
+  [Segments.PARAMS]: Joi.object().keys({
+    id: Joi.number().required(),
+  }),
+  [Segments.BODY]: Joi.object().keys({
+    calorieIntake: Joi.number().min(0.1).max(35000.0),
+    exerciseTime: Joi.number().min(0.001).max(24.0),
+    mood: Joi.string().min(3).max(7),
+    vitaminTaken: Joi.boolean(),
+    energyLevel: Joi.number().min(1).max(5),
+    sleepQuality: Joi.number().min(1).max(5)
+  }).or('calorieIntake', 'exerciseTime', 'mood', 'vitaminTaken', 'energyLevel', 'sleepQuality'),
+}), LogController.update);
 
 module.exports = routes;
