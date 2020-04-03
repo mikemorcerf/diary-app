@@ -125,7 +125,7 @@ module.exports = {
       whereParams.exerciseTime = createOperatorFilter(exerciseTimeFilterType, exerciseTimeFilter);
     };
 
-////    // If there is a calorieIntakeFilter, check whether it is valid. If yes, add it to the query whereParams
+    // If there is a calorieIntakeFilter, check whether it is valid. If yes, add it to the query whereParams
     if(calorieIntakeFilter){
       if(!calorieIntakeFilterType){
         return res.status(400).json({error: 'Missing calorieIntakeFilterType.'});
@@ -135,7 +135,7 @@ module.exports = {
       if(!filterTypeIsValid(calorieIntakeFilterType)){
         return res.status(400).json({error: 'Invalid calorieIntakeFilterType.'});
       };
-      whereParams.exerciseTime = createOperatorFilter(calorieIntakeFilterType, calorieIntakeFilter);
+      whereParams.calorieIntake = createOperatorFilter(calorieIntakeFilterType, calorieIntakeFilter);
     };
 
     // If there is a vitaminTakenFilter, add it to the query whereParams
