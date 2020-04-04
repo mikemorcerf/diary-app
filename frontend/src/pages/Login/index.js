@@ -1,5 +1,6 @@
 import React from 'react';
-import { FiCornerRightUp } from 'react-icons/fi'
+import { Link } from 'react-router-dom';
+import { FiCornerRightUp } from 'react-icons/fi';
 
 import './styles.css';
 
@@ -18,10 +19,10 @@ export default function Login () {
           <input placeholder="password" />
           <button className="button" type="submit">Open diary</button>
 
-          <a href="/register">
+          <Link className="bottom-link" to="/register">
             <FiCornerRightUp size={16} className="pinkColor" />
             Don't have an account? Sign up
-          </a>
+          </Link>
         </form>
       </section>
 
