@@ -5,6 +5,7 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import Profile from './pages/Profile';
 import ProfileLogs from './pages/ProfileLogs';
+import NewLog from './pages/NewLog';
 
 export default function Routes() {
   return(
@@ -13,7 +14,8 @@ export default function Routes() {
         <Route path="/" exact component={Login} />
         <Route path="/register" component={Register} />
         <Route path="/profile" exact component={Profile} />
-        <Route path="/profile/logs" component={ProfileLogs} />
+        <Route path="/profile/logs" exact component={ProfileLogs} />
+        <Route path="/profile/logs/new" component={NewLog} />
       </Switch>
     </BrowserRouter>
   );

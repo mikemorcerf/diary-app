@@ -29,11 +29,31 @@
 
 .profile-logs-container .content li {
   padding: 20px;
+  margin-bottom: 10px;
   background-color: var(--purpleColor);
   width: 100%;
   align-items: center;
   justify-content: center;
   border-radius: 8px;
+  position: relative;
+}
+
+.profile-logs-container .content li button {
+  color: var(--pinkColor);
+  background: transparent;
+  position: absolute;
+  right: 55px;
+  top: 10px;
+  border: 0;
+  transition: filter 0.2s;
+}
+
+.profile-logs-container .content li button:hover {
+  filter: brightness(90%);
+}
+
+.profile-logs-container .content li button + button {
+  right: 22px;
 }
 
 .profile-logs-container .content li h2 {

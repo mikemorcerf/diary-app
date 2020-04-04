@@ -16,11 +16,11 @@ export default function Header() {
         </div>
 
         <div className="header-button-section">
-          <Link className="header-button" to="/">
+          <Link className="header-button" to="/profile/logs">
             Diary
           </Link>
 
-          <Link className="header-button" to="/">
+          <Link className="header-button" to="/profile/logs/new">
             New log
           </Link>
 

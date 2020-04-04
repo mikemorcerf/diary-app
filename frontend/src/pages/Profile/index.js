@@ -12,18 +12,18 @@ export default function Profile() {
       <div className="profile-container">
         <div className="content">
           <section>
-            <h1>Hello user name. How are your doing today?</h1>
+            <h1>Hello user name. How are you doing today?</h1>
             <p>Full name</p>
             <p>Email address</p>
             <p>Member since date</p>
           </section>
 
           <section>
-            <Link to="/" className="button">
+            <Link to="/profile/logs" className="button">
               <FiEye size={25} className="button-icon" />
               <span>See Diary entries</span>
             </Link>
-            <Link to="/" className="button">
+            <Link to="/profile/logs/new" className="button">
               <FiEdit size={25} className="button-icon" />
               <span>Create new entry</span>
             </Link>
