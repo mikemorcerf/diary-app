@@ -1,0 +1,51 @@
+.profile-logs-container {
+  width: 100%;
+  max-width: 1120px;
+  height: 100vh;
+  margin: 0 auto;
+  padding-top: 100px;
+  background-color: var(--purpleColor);
+  justify-content: center;
+}
+
+.profile-logs-container .content {
+  width: 100%;
+  padding: 50px;
+  background-color: var(--lightPurpleColor);
+  box-shadow: 0 0 100px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  display: inline-block;
+}
+
+.profile-logs-container .content h1 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.profile-logs-container .content ul {
+  width: 100%;
+  list-style-type: none;
+}
+
+.profile-logs-container .content li {
+  padding: 20px;
+  background-color: var(--purpleColor);
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+}
+
+.profile-logs-container .content li h2 {
+  text-align: center;
+}
+
+.profile-logs-container .content li section {
+  display: inline-block;
+  justify-content: space-between;
+  width: 50%;
+}
+
+.profile-logs-container .content li section p {
+  font-weight: 700;
+}
