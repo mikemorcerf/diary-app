@@ -1,0 +1,69 @@
+@import '../../vars.css';
+
+.header-container {
+  position: absolute;
+  overflow-y: scroll;
+  width: 100%;
+  padding: 0 10px;
+  background-color: var(--lightPurpleColor);
+  height: 85px;
+}
+
+.header-container header {
+  display: flex;
+  align-items: center;
+  height: 85px;
+}
+
+.header-container header .logo-header {
+  height: 80px;
+  width: 160px;
+  margin-left: 20px;
+}
+
+.header-container header .header-button-section {
+  margin-left: auto;
+  height: 85px;
+  width: 500px;
+
+}
+
+.header-container header .header-button-section .header-button {
+  margin-top: 0px;
+  height: 85px;
+  width: 35%;
+  min-width: 5px;
+  margin-right: 10px;
+  
+
+  background-color: var(--lightPurpleColor);
+  border: 0;
+  color: var(--white);
+  font-weight: 700;
+  display: inline-block;
+  vertical-align: top;
+  text-align: center;
+  text-decoration: none;
+  font-size: 20px;
+  line-height: 85px;
+  transition: filter 0.2s;
+}
+
+.header-container header .header-button-section .header-button:hover {
+  filter: brightness(94%);
+}
+
+.header-container header .header-button-section .log-out-button {
+  margin-top: 0px;
+  margin-left: 10px;
+  height: 85px;
+  width: 20%;
+  border: none;
+  background-color: var(--lightPurpleColor);
+
+  transition: filter 0.2s;
+}
+
+.header-container header .log-out-button:hover {
+  filter: brightness(94%);
+}

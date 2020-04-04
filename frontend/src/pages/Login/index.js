@@ -9,24 +9,26 @@ import logoImg from '../../assets/logo.png';
 
 export default function Login () {
   return (
-    <div className="login-container">
-      <section className="form">
-        <img src={logoImg} className="logo-size" alt="Diary App logo" />
-        <form>
-          <h1>Hello there. Log in here:</h1>
+    <div>
+      <div className="login-container">
+        <section className="form">
+          <img src={logoImg} className="logo-size" alt="Diary App logo" />
+          <form>
+            <h1>Hello there. Log in here:</h1>
 
-          <input placeholder="Your email" />
-          <input placeholder="password" />
-          <button className="button" type="submit">Open diary</button>
+            <input placeholder="Your email" />
+            <input placeholder="password" />
+            <button className="button" type="submit">Open diary</button>
 
-          <Link className="bottom-link" to="/register">
-            <FiCornerRightUp size={16} className="pinkColor" />
-            Don't have an account? Sign up
-          </Link>
-        </form>
-      </section>
+            <Link className="bottom-link" to="/register">
+              <FiCornerRightUp size={16} className="pinkColor" />
+              Don't have an account? Sign up
+            </Link>
+          </form>
+        </section>
 
-      <img src={welcomeImg} className="image-size" alt="Welcome to Diary App" />
+        <img src={welcomeImg} className="image-size" alt="Welcome to Diary App" />
+      </div>
     </div>
   );
 }
