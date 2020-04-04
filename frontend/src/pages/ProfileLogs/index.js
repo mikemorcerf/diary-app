@@ -6,7 +6,6 @@ export default function () {
     <div>
       <Header />
       <div className="profile-logs-container">
-
         <ul>
           <li>
             

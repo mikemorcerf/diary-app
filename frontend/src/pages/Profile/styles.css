@@ -1,5 +1,3 @@
-@import '../../vars.css';
-
 .profile-container {
   width: 100%;
   max-width: 1120px;
@@ -23,6 +21,15 @@
   justify-content: space-between;
 }
 
+.profile-container .content section .button-icon {
+  color: var(white);
+  margin: 18px 20px 0 0;
+}
+
+.profile-container .content section span {
+  vertical-align: top;
+}
+
 .profile-container .content section {
   width: 100%;
   max-width: 380px;
@@ -37,13 +44,4 @@
   font-size: 18px;
   color: var(--textColor);
   line-height: 32px;
-}
-
-.profile-container .content form {
-  width: 100%;
-  max-width: 450px;
-}
-
-.profile-container .content form input {
-  margin-top: 8px;
 }

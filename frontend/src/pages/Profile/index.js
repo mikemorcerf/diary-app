@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { FiEye, FiEdit } from 'react-icons/fi';
 import Header from '../Header';
 
 import './styles.css';
@@ -12,22 +13,21 @@ export default function Profile() {
         <div className="content">
           <section>
             <h1>Hello user name. How are your doing today?</h1>
-            <p>Sign up to start keeping records of your days</p>
-
-            <Link className="bottom-link" to="/">
-
-              Already registered? Go back to Sign in page
-            </Link>
+            <p>Full name</p>
+            <p>Email address</p>
+            <p>Member since date</p>
           </section>
 
-          <form>
-            <input placeholder="First Name" />
-            <input placeholder="Last Name" />
-            <input type="email" placeholder="Email" />
-            <input type="password" placeholder="Password" />
-
-            <button className="button" type="submit" >Register</button>
-          </form>
+          <section>
+            <Link to="/" className="button">
+              <FiEye size={25} className="button-icon" />
+              <span>See Diary entries</span>
+            </Link>
+            <Link to="/" className="button">
+              <FiEdit size={25} className="button-icon" />
+              <span>Create new entry</span>
+            </Link>
+          </section>
         </div>
       </div>
     </div>

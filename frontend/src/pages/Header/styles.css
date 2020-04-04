@@ -1,5 +1,3 @@
-@import '../../vars.css';
-
 .header-container {
   position: absolute;
   overflow-y: scroll;
@@ -34,8 +32,6 @@
   width: 35%;
   min-width: 5px;
   margin-right: 10px;
-  
-
   background-color: var(--lightPurpleColor);
   border: 0;
   color: var(--white);

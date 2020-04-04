@@ -17,7 +17,7 @@ export default function Login () {
             <h1>Hello there. Log in here:</h1>
 
             <input placeholder="Your email" />
-            <input placeholder="password" />
+            <input placeholder="Password" />
             <button className="button" type="submit">Open diary</button>
 
             <Link className="bottom-link" to="/register">
