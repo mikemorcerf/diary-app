@@ -1,0 +1,100 @@
+.edit-log-container {
+  width: 100%;
+  max-width: 1120px;
+  height: 100vh;
+  margin: 0 auto;
+  background-color: var(--purpleColor);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.edit-log-container .content {
+  width: 100%;
+  padding: 30px;
+  background-color: var(--lightPurpleColor);
+  box-shadow: 0 0 100px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+
+  display: inline-block;
+  justify-content: space-between;
+}
+
+.edit-log-container .content h1 {
+  width: 100%;
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.edit-log-container .content .form-content {
+  justify-content: center;
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.edit-log-container .content form .button {
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.edit-log-container .content section {
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.edit-log-container .content section .time {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  width: 100%;
+  grid-gap: 10px;
+}
+
+.edit-log-container .content section .pick-attribute {
+  position: relative;
+  padding-top: 17px;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background-color: #ffffff;
+  margin-top: 10px;
+  width: 100%;
+  height: 60px;
+  border: 1px solid #dcdce6;
+  border-radius: 8px;
+  font: 400 18px 'Baloo Thambi 2', sans-serif;
+  color: var(--textColor);
+}
+
+.edit-log-container .content section .pick-attribute svg {
+  position: absolute;
+  right: 30px;
+  top: 5px;
+  cursor: pointer;
+}
+
+.vitamin-switch-class {
+  display: inline-block;
+}
+
+.range-class {
+  display: inline-flex;
+  width: 90%;
+  align-items: center;
+  justify-content: center;
+}
+
+.edit-log-container .content section h1 {
+  margin: 15px 0 10px;
+  font-size: 32px;
+}
+
+.edit-log-container .content section p {
+  font-size: 18px;
+  color: var(--textColor);
+  line-height: 32px;
+}

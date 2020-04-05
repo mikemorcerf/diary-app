@@ -6,6 +6,7 @@ import Register from './pages/Register';
 import Profile from './pages/Profile';
 import ProfileLogs from './pages/ProfileLogs';
 import NewLog from './pages/NewLog';
+import EditLog from './pages/EditLog';
 
 export default function Routes() {
   return(
@@ -16,6 +17,7 @@ export default function Routes() {
         <Route path="/profile" exact component={Profile} />
         <Route path="/profile/logs" exact component={ProfileLogs} />
         <Route path="/profile/logs/new" component={NewLog} />
+        <Route path="/profile/logs/update/:id" component={EditLog} />
       </Switch>
     </BrowserRouter>
   );
