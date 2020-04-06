@@ -46,6 +46,7 @@ export default function Profile() {
           <section>
             <h1>Hello {firstName}. How are you doing today?</h1>
             <p>{firstName} {lastName}</p>
+            <p>Your id: {id}</p>
             <p>Email address: {email}</p>
             <p>Member since {moment(createdAt).format('MMMM Do YYYY')}</p>
           </section>
