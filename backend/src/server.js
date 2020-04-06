@@ -4,13 +4,14 @@
 // Github: https://github.com/mikemorcerf
 
 const express = require('express');
-const bodyParser = require('body-parser');
+const cors = require('cors');
 
 const app = express();
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+
+app.use(cors());
+app.use(express.json());
 
 //Send api requests to src/routes.js
-app.use('/api', require('./src/routes'));
+app.use('/api', require('./routes'));
 
-app.listen(3001);
+app.listen(3333);

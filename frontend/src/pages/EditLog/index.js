@@ -2,6 +2,8 @@ import React from 'react';
 import Header from '../Header';
 import { Form } from 'react-bootstrap';
 
+import Emoji from '../../components/Emoji';
+
 import './styles.css';
 
 export default function EditLog() {
@@ -38,12 +40,12 @@ export default function EditLog() {
                 </div>
                 <div className="pick-attribute">
                   <Form.Group controlId="mood-select" className="range-class">
-                    <Form.Label>Mood</Form.Label>
+                    <Form.Label>Mood <Emoji symbol="😄" label="happy"/></Form.Label>
                     <Form.Control as="select" style={{position:'relative', bottom:'5px', border:'none', maxWidth:'150px'}} custom>
-                      <option>Happy 😄</option>
-                      <option>Calm 😊</option>
-                      <option>Sad 😔</option>
-                      <option>Annoyed 😤</option>
+                      <option>Happy</option>
+                      <option>Calm</option>
+                      <option>Sad</option>
+                      <option>Annoyed</option>
                     </Form.Control>
                   </Form.Group>
                 </div>
