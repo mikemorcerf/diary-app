@@ -14,6 +14,8 @@ export default function Register() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
+  const history = useHistory();
+
   async function handleRegister(event) {
     event.preventDefault();
     const data = {
@@ -24,21 +26,14 @@ export default function Register() {
     };
 
     try {
-      const response = await api.post('register', data);
-      if(response.data.id.length() > 0){
-        //If user was successfully registered, authenticate it
-        try {
-          const token = await api.post('authenticate', { email, password });
-          useHistory.push('/profile');
-        } catch (err) {
-          alert(err)
-        }
-      }
+      await api.post('register', data);
+      const response = await api.post('authenticate', { email, password });
+      localStorage.setItem("token", response.data.token);
+      history.push('/profile');
     } catch(err) {
-      alert(err);
+      alert('Error signing up. Please try again.');
     }
   }
-
 
   return (
     <div className="register-container">

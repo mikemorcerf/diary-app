@@ -52,6 +52,8 @@ button {
 
 .button:hover {
   filter: brightness(95%);
+  color: var(--white);
+  text-decoration: none;
 }
 
 .bottom-link {
@@ -66,7 +68,9 @@ button {
 }
 
 .bottom-link:hover {
-  opacity: 0.8;
+  opacity: 0.7;
+  color: var(--pinkColor);
+  text-decoration: none;
 }
 
 .bottom-link svg {

@@ -1,11 +1,38 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link, useHistory } from 'react-router-dom';
 import { FiEye, FiEdit } from 'react-icons/fi';
 import Header from '../Header';
+
+import api from '../../services/api';
 
 import './styles.css';
 
 export default function Profile() {
+  const [id, setId] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [email, setEmail] = useState('');
+  const [createdAt, setCreatedAt] = useState('');
+
+  const authorizationToken = localStorage.getItem('token');
+  const history = useHistory();
+
+  useEffect(() => {
+    try {
+      api.get('profile', {
+        headers: {
+          Authorization: `Bearer ${authorizationToken}`,
+        },
+      }).then(reponse => {
+        
+      });
+    } catch (err) {
+      console.log('authorizationToken');
+      alert(authorizationToken);
+      history.push('/');
+    }
+  }, []);
+
   return(
     <div>
       <Header />
