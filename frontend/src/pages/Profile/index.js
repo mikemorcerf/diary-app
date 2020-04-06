@@ -32,8 +32,6 @@ export default function Profile() {
         setCreatedAt(response.data.createdAt);
       });
     } catch (err) {
-      console.log('authorizationToken');
-      alert(authorizationToken);
       history.push('/');
     }
   }, [authorizationToken, history]);

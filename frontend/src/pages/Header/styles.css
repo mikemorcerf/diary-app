@@ -1,43 +1,44 @@
 .header-container {
+  background-color: var(--lightPurpleColor);
   position: absolute;
   overflow-y: scroll;
   width: 100%;
-  padding: 0 10px;
-  background-color: var(--lightPurpleColor);
   height: 85px;
+  padding: 0 50px;
+
+  display: grid;
+  grid-template-columns: 1fr 6fr;
 }
 
-.header-container header {
+.header-container .logo-section {
+  align-content: center;
+  justify-content: center;
+}
+
+.header-container .button-section {
   display: flex;
+  margin-left: auto;
   align-items: center;
-  height: 85px;
+  justify-items: center;
 }
 
-.header-container header .logo-header {
+.header-container .button-section div {
+  padding-left: 35px;
+}
+
+.header-container .logo-header {
   height: 80px;
   width: 160px;
-  margin-left: 20px;
 }
 
-.header-container header .header-button-section {
-  margin-left: auto;
-  height: 85px;
-  width: 500px;
-
-}
-
-.header-container header .header-button-section .header-button {
+.header-container .button-section .header-button {
   margin-top: 0px;
   height: 85px;
-  width: 35%;
-  min-width: 5px;
-  margin-right: 10px;
+  width: 10vw;
   background-color: var(--lightPurpleColor);
-  border: 0;
   color: var(--white);
   font-weight: 700;
-  display: inline-block;
-  vertical-align: top;
+  display: block;
   text-align: center;
   text-decoration: none;
   font-size: 20px;
@@ -45,21 +46,72 @@
   transition: filter 0.2s;
 }
 
-.header-container header .header-button-section .header-button:hover {
+.header-container .button-section .header-button:hover {
   filter: brightness(94%);
 }
 
-.header-container header .header-button-section .log-out-button {
-  margin-top: 0px;
-  margin-left: 10px;
+.header-container .button-section .log-out-button {
+  margin-top: 0;
   height: 85px;
-  width: 20%;
   border: none;
-  background-color: var(--lightPurpleColor);
-
+  background-color: transparent;
   transition: filter 0.2s;
 }
 
-.header-container header .log-out-button:hover {
-  filter: brightness(94%);
+.header-container .button-section .log-out-button:hover {
+  filter: brightness(93%);
+}
+
+@media (max-width: 600px) {
+  .header-container {
+    background-color: var(--lightPurpleColor);
+    position: absolute;
+    overflow-y: scroll;
+    width: 100%;
+    height: 70px;
+    padding: 0 20px;
+  
+    display: grid;
+    grid-template-columns: 1fr 6fr;
+  }
+  
+  .header-container .button-section div {
+    padding-left: 5px;
+  }
+  
+  .header-container .logo-header {
+    height: 60px;
+    width: 120px;
+  }
+  
+  .header-container .button-section .header-button {
+    margin-top: 0px;
+    height: 70px;
+    width: 20vw;
+    background-color: var(--lightPurpleColor);
+    color: var(--white);
+    font-weight: 700;
+    display: block;
+    text-align: center;
+    text-decoration: none;
+    font-size: 18px;
+    line-height: 70px;
+    transition: filter 0.2s;
+  }
+  
+  .header-container .button-section .header-button:hover {
+    filter: brightness(94%);
+  }
+  
+  .header-container .button-section .log-out-button {
+    margin-top: 0;
+    height: 70px;
+    border: none;
+    background-color: transparent;
+    transition: filter 0.2s;
+  }
+  
+  .header-container .button-section .log-out-button:hover {
+    filter: brightness(93%);
+  }
 }

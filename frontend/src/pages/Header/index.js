@@ -8,27 +8,29 @@ import logoImg from '../../assets/lightLogo.png';
 export default function Header() {
   return (
     <div className="header-container">
-      <header>
-        <div className="content">
+        <section className="logo-section">
           <Link to="/profile">
             <img src={logoImg} className="logo-header" alt="Diary App logo" />
           </Link>
-        </div>
+        </section>
 
-        <div className="header-button-section">
-          <Link className="header-button" to="/profile/logs">
-            Diary
-          </Link>
-
-          <Link className="header-button" to="/profile/logs/new">
-            New log
-          </Link>
-
-          <button className="log-out-button" type="button">
-            <FiPower size={45} className="pinkColor" />
-          </button>
-        </div>
-      </header>
+        <section className="button-section">
+          <div>
+            <Link className="header-button" to="/profile/logs">
+              Diary
+            </Link>
+          </div>
+          <div>
+            <Link className="header-button" to="/profile/logs/new">
+              New log
+            </Link>
+          </div>
+          <div>
+            <button className="log-out-button" type="button">
+              <FiPower size={45} className="pinkColor" />
+            </button>
+          </div>
+        </section>
     </div>
   );
 }

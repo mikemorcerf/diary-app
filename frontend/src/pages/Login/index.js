@@ -27,7 +27,7 @@ export default function Login () {
       localStorage.setItem("token", response.data.token);
       history.push('/profile');
     } catch(err) {
-      alert('Error logging in. Please try again.');
+      alert('Error loggin in. Please try again.');
     }
   }
 
@@ -36,7 +36,6 @@ export default function Login () {
       <div className="login-container">
         <section className="form">
           <img src={logoImg} className="logo-size" alt="Diary App logo" />
-          
           <form onSubmit={handleLogin}>
             <h1>Hello there. Log in here:</h1>
             <input
