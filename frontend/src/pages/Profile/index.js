@@ -36,7 +36,7 @@ export default function Profile() {
       alert(authorizationToken);
       history.push('/');
     }
-  }, [authorizationToken]);
+  }, [authorizationToken, history]);
 
   return(
     <div>
