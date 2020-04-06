@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { FiEye, FiEdit } from 'react-icons/fi';
 import Header from '../Header';
+import moment from 'moment';
 
 import api from '../../services/api';
 
@@ -23,15 +24,19 @@ export default function Profile() {
         headers: {
           Authorization: `Bearer ${authorizationToken}`,
         },
-      }).then(reponse => {
-        
+      }).then(response => {
+        setId(response.data.id);
+        setFirstName(response.data.firstName);
+        setLastName(response.data.lastName);
+        setEmail(response.data.email);
+        setCreatedAt(response.data.createdAt);
       });
     } catch (err) {
       console.log('authorizationToken');
       alert(authorizationToken);
       history.push('/');
     }
-  }, []);
+  }, [authorizationToken]);
 
   return(
     <div>
@@ -39,10 +44,10 @@ export default function Profile() {
       <div className="profile-container">
         <div className="content">
           <section>
-            <h1>Hello user name. How are you doing today?</h1>
-            <p>Full name</p>
-            <p>Email address</p>
-            <p>Member since date</p>
+            <h1>Hello {firstName}. How are you doing today?</h1>
+            <p>{firstName} {lastName}</p>
+            <p>Email address: {email}</p>
+            <p>Member since {moment(createdAt).format('MMMM Do YYYY')}</p>
           </section>
 
           <section>
