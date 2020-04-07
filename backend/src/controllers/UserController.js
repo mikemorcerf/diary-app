@@ -25,7 +25,7 @@ module.exports = {
     try{
         if(await User.findOne({ where: {email: email} })){
           return res.status(400).json({error:`${email} is already registered.`});
-        };
+        }
 
         newUser = await User.create({
         id,
@@ -56,7 +56,7 @@ module.exports = {
     }
     if(!user){
       return res.status(404).json({error:"User not found."});
-    };
+    }
     return res.json(user);
   },
 
@@ -68,7 +68,7 @@ module.exports = {
     //Check if user exists and if password is correct
     if(!user || !await bcrypt.compare(password, user.password)){
       return res.status(400).json({error:'Email or password are invalid. Please try again.'});
-    };
+    }
 
     user.password = undefined;
 
@@ -90,7 +90,7 @@ module.exports = {
       });
       if(!user){
         return res.status(400).json({error: 'Email not registered.'});
-      };
+      }
 
       token = crypto.randomBytes(20).toString('HEX');
       const now = new Date();
@@ -101,7 +101,7 @@ module.exports = {
       
     } catch (err) {
       return res.status(400).json({error:`${err}`});
-    };
+    }
     
     return res.json({ token });
   },
@@ -117,15 +117,15 @@ module.exports = {
 
       if(!user){
         return res.status(400).json({error: 'User not found.'});
-      };
+      }
 
       if(user.passwordResetToken !== token){
         return res.status(400).json({error: 'Invalid token.'});
-      };
+      }
 
       if(Date.now() > user.passwordResetExpires){
         return res.status(400).json({error: 'Token expired.'});
-      };
+      }
 
       user.password = await bcrypt.hash(password, 10);
       user.passwordResetToken = null;
@@ -137,6 +137,6 @@ module.exports = {
       return res.json(user);
     } catch (err) {
       return res.status(400).json({error:'Error reseting password.'});
-    };
+    }
   }
-};
+}
