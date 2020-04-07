@@ -90,7 +90,7 @@ routes.delete('/profile/logs/:id', celebrate({
   })
 }), LogController.delete);
 
-routes.patch('/profile/logs/:id', celebrate({
+routes.put('/profile/logs/:id', celebrate({
   [Segments.PARAMS]: Joi.object().keys({
     id: Joi.number().required(),
   }),
