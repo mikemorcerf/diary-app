@@ -1,5 +1,5 @@
 import React from 'react';
-import Header from '../Header';
+import Header from '../../components/Header';
 import { Form } from 'react-bootstrap';
 
 import Emoji from '../../components/Emoji';
@@ -10,46 +10,42 @@ export default function EditLog() {
   return(
     <div>
       <Header />
-      <div className="edit-log-container">
+      <div className="new-log-container">
         <div className="content">
-        <h1>Would you like to edit the entry from DATETIME?</h1>
-          <Form>
-            <div className="form-content">
-              <section>
-                <span className="time">
-                  <input label="Exercise" type="number" placeholder="Hours exercising" min="0" max="23" />
-                  <input type="number" placeholder="Minutes exercising" min="0" max="59" />
-                </span>
-                <input type="number" placeholder="Calory Intake" min="0.1" max="35000.0" />
-                <div className="pick-attribute">
-                  Vitamin Taken? <Form.Check type="switch" className="vitamin-switch-class" id="vitamin-switch" label="" />
-                </div>
-              </section>
-              <section>
-                <div className="pick-attribute">
-                  <Form.Group controlId="energy-range" className="range-class" >
-                    <Form.Label style={{minWidth:'160px', marginRight:'15px', top:'100px'}} >Energy level:</Form.Label>
-                    <Form.Control style={{paddingBottom:'14px', border:'none'}} type="range" custom min={1} max={5} />
-                  </Form.Group>
-                </div>
-                <div className="pick-attribute">
-                  <Form.Group controlId="sleep-range" className="range-class" >
-                    <Form.Label style={{minWidth:'160px', marginRight:'15px', top:'100px'}} >Sleep quality:</Form.Label>
-                    <Form.Control style={{paddingBottom:'14px', border:'none'}} type="range" custom min={1} max={5} />
-                  </Form.Group>
-                </div>
-                <div className="pick-attribute">
-                  <Form.Group controlId="mood-select" className="range-class">
-                    <Form.Label>Mood <Emoji symbol="😄" label="happy"/></Form.Label>
-                    <Form.Control as="select" style={{position:'relative', bottom:'5px', border:'none', maxWidth:'150px'}} custom>
-                      <option>Happy</option>
-                      <option>Calm</option>
-                      <option>Sad</option>
-                      <option>Annoyed</option>
-                    </Form.Control>
-                  </Form.Group>
-                </div>
-              </section>
+          <h1>What would you like to change on record from DATEEEEEE</h1>
+          <Form className="form-content">
+            <div className="time-input-one label-box">
+              <div className="label">Hours exercising:</div>
+              <input label="Exercise" type="number" className="input-field" min="0" max="23" />
+            </div>
+            <div className="time-input-two label-box">
+              <div className="label">Minutes exercising:</div>
+              <input type="number" min="0" max="59" className="input-field"/>
+            </div>
+            <div className="calory-input label-box">
+              <div className="label">Calory Intake:</div>
+              <input type="number" min="0.1" max="35000.0" className="input-field" />
+            </div>
+            <div className="vitamin-input label-box">
+              <div className="label">Vitamin Taken?</div>
+              <Form.Check type="switch" className="input-field" id="vitamin-switch" style={{marginTop:'10px'}} label="" />
+            </div>
+            <div className="energy-input label-box">
+              <div className="label">Energy level:</div>
+              <Form.Control controlId="energy-range" className="input-field" style={{border:'none', marginTop:'15px'}} type="range" custom min={1} max={5} />
+            </div>
+            <div className="sleep-input label-box">
+              <div className="label">Sleep quality:</div>
+              <Form.Control controlId="sleep-range" className="input-field" style={{border:'none', marginTop:'15px'}} type="range" custom min={1} max={5} />
+            </div>
+            <div className="mood-input label-box">
+              <div className="label">Mood <Emoji symbol="😄" label="happy"/></div>
+              <Form.Control as="select" className="input-field" custom>
+                <option>Happy</option>
+                <option>Calm</option>
+                <option>Sad</option>
+                <option>Annoyed</option>
+              </Form.Control>
             </div>
             <button className="button" type="submit" >Save</button>
           </Form>

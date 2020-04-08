@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { FiEye, FiEdit } from 'react-icons/fi';
-import Header from '../Header';
+import Header from '../../components/Header';
 import moment from 'moment';
 
 import api from '../../services/api';

@@ -47,3 +47,13 @@
 .register-container .content form input {
   margin-top: 8px;
 }
+
+@media (max-width:900px) {
+  .register-container .content {
+    display: grid;
+    grid-template-columns: 1fr;
+    justify-items: center;
+    align-items: center;
+    padding: 96px 0;
+  }
+}

@@ -45,3 +45,12 @@
   color: var(--textColor);
   line-height: 32px;
 }
+
+@media (max-width:800px) {
+  .profile-container .content {
+    display: grid;
+    grid-template-columns: 1fr;
+    padding: 96px auto;
+    justify-items: center;
+  }
+}

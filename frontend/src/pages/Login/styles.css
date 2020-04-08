@@ -40,3 +40,9 @@
 .pinkColor {
   color: var(--pinkColor);
 }
+
+@media (max-width:800px) {
+  .image-size {
+    display: none;
+  }
+}
