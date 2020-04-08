@@ -15,26 +15,21 @@ export default function Profile() {
   const [email, setEmail] = useState('');
   const [createdAt, setCreatedAt] = useState('');
 
-  const authorizationToken = localStorage.getItem('token');
   const history = useHistory();
 
   useEffect(() => {
-    try {
-      api.get('profile', {
-        headers: {
-          Authorization: `Bearer ${authorizationToken}`,
-        },
-      }).then(response => {
+    api.get('profile')
+      .then(response => {
         setId(response.data.id);
         setFirstName(response.data.firstName);
         setLastName(response.data.lastName);
         setEmail(response.data.email);
         setCreatedAt(response.data.createdAt);
+      }).catch((err) => {
+        alert(`Please log in to access this page: ${JSON.stringify(err.response.data.error)}`);
+        history.push('/');
       });
-    } catch (err) {
-      history.push('/');
-    }
-  }, [authorizationToken, history]);
+  }, [history]);
 
   return(
     <div>

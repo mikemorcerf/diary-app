@@ -22,13 +22,14 @@ export default function Login () {
       password
     };
 
-    try {
-      const response = await api.post('authenticate', data);
-      localStorage.setItem("token", response.data.token);
-      history.push('/profile');
-    } catch(err) {
-      alert('Error loggin in. Please try again.');
-    }
+    await api.post('authenticate', data)
+      .then((response)=>{
+        api.defaults.headers.common['Authorization'] = `Bearer ${response.data.token}`;
+        history.push('/profile');
+      })
+      .catch((err)=>{
+        alert(`Error logging in: ${err.response.data.error}`);
+      });
   }
 
   return (

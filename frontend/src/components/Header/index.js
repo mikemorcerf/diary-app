@@ -1,11 +1,23 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { FiPower } from 'react-icons/fi';
+import api from '../../services/api';
 
 import './styles.css';
 import logoImg from '../../assets/lightLogo.png';
 
+
 export default function Header() {
+
+  const history = useHistory();
+
+  function handleLogOut(event) {
+    event.preventDefault();
+    delete api.defaults.headers.common["Authorization"];
+    localStorage.clear();
+    history.push('/');
+  }
+
   return (
     <div className="header-container">
         <section className="logo-section">
@@ -26,7 +38,7 @@ export default function Header() {
             </Link>
           </div>
           <div>
-            <button className="log-out-button" type="button">
+            <button className="log-out-button" type="button" onClick={handleLogOut} >
               <FiPower size={45} className="pinkColor" />
             </button>
           </div>

@@ -25,14 +25,21 @@ export default function Register() {
       password,
     };
 
-    try {
-      await api.post('register', data);
-      const response = await api.post('authenticate', { email, password });
-      localStorage.setItem("token", response.data.token);
-      history.push('/profile');
-    } catch(err) {
-      alert('Error signing up. Please try again.');
-    }
+    await api.post('register', data)
+      .then(async()=>{
+        await api.post('authenticate', { email, password })
+        .then((response) => {
+          api.defaults.headers.common['Authorization'] = `Bearer ${response.data.token}`;
+          history.push('/profile');
+        })
+        .catch((err)=>{
+          alert(`Error authenticating: ${err.response.data.error}`);
+          history.push('/');
+        });
+      })
+      .catch((err)=>{
+        alert(`Error signing up: ${err.response.data.error}`);
+    });
   }
 
   return (
