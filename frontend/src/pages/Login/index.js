@@ -28,7 +28,7 @@ export default function Login () {
         history.push('/profile');
       })
       .catch((err)=>{
-        alert(`Error logging in: ${err.response.data.error}`);
+        alert(`Error logging in: ${JSON.stringify(err.response.data.error)}`);
       });
   }
 

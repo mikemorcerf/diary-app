@@ -66,7 +66,7 @@ routes.get('/profile/logs', celebrate({
     energyLevelFilterType: Joi.string().length(3),
     sleepQualityFilter: Joi.number().min(1).max(5),
     sleepQualityFilterType: Joi.string().length(3),
-    calorieIntakeFilter: Joi.number().required().min(0.1).max(35000.0),
+    calorieIntakeFilter: Joi.number().min(0.1).max(35000.0),
     calorieIntakeFilterType: Joi.string().length(3),
     filterOrderAttribute: Joi.string(),
     filterOrder: Joi.string().min(3).max(4)

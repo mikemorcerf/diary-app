@@ -33,12 +33,12 @@ export default function Register() {
           history.push('/profile');
         })
         .catch((err)=>{
-          alert(`Error authenticating: ${err.response.data.error}`);
+          alert(`Error authenticating: ${JSON.stringify(err.response.data.error)}`);
           history.push('/');
         });
       })
       .catch((err)=>{
-        alert(`Error signing up: ${err.response.data.error}`);
+        alert(`Error signing up: ${JSON.stringify(err.response.data.error)}`);
     });
   }
 
