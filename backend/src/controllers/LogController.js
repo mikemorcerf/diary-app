@@ -176,7 +176,7 @@ module.exports = {
      }
     );
 
-    res.header('X-Total-Count', count);
+    res.set('X-Total-Count', count);
 
     return res.json(rows);
   },

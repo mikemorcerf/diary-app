@@ -8,7 +8,12 @@ const cors = require('cors');
 
 const app = express();
 
-app.use(cors());
+//Set up Access-Control-Expose-Headers for cors requests so clients can see total logs in db
+var corsOptions = {
+  exposedHeaders: 'X-Total-Count'
+}
+
+app.use(cors(corsOptions));
 app.use(express.json());
 
 //Send api requests to src/routes.js
