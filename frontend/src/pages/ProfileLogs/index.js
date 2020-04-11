@@ -3,7 +3,8 @@ import { useHistory } from 'react-router-dom';
 import Header from '../../components/Header';
 import { FiTrash2, FiEdit2 } from 'react-icons/fi';
 import moment from 'moment';
-import useInfiniteScroll from '../../components/useInfiniteScroll';
+import InfiniteScroll from 'react-infinite-scroller';
+import ApiAuthorization from '../../services/ApiAuthorization';
 import api from '../../services/api';
 
 import './styles.css';
@@ -11,17 +12,21 @@ import './styles.css';
 export default function ProfileLogs() {
   const [page, setPage] = useState(1);
   const [logs, setLogs] = useState([]);
-  const [numLogs, setNumLogs] = useState(0)
-  const [isFetching, setIsFetching] = useInfiniteScroll(fetchMoreListItems);
+  const [numLogs, setNumLogs] = useState(0);
   const [filters, setFilters] = useState('');
+  const [hasMoreLogs, setHasMoreLogs] = useState(true);
+  const [allowFetch, setAllowFetch] = useState(false);
 
   const history = useHistory();
 
   useEffect(()=>{
+    setPage(1);
+    ApiAuthorization();
     api.get(`/profile/logs?page=${page}`).then((response)=>{
       setPage(page+1);
       setLogs(response.data);
-      console.log(response.headers['x-total-count']);
+      setNumLogs(response.headers['x-total-count']);
+      setAllowFetch(true);
     }).catch((err)=>{
       alert(`Please log in to access this page: ${JSON.stringify(err.response.data.error)}`);
       history.push('/');
@@ -29,13 +34,42 @@ export default function ProfileLogs() {
   },[]);
 
   async function fetchMoreListItems() {
-    await api.get(`/profile/logs?page=${page}${filters}`).then((response)=>{
-      setLogs([...logs, response.data]);
-      setIsFetching(false);
-      setPage(page+1);
+    if(allowFetch){
+      //If all items are loaded, do not fetch items anymore
+      if((!hasMoreLogs)||(numLogs>0 && numLogs==logs.length)) {
+        if(hasMoreLogs) { 
+          setHasMoreLogs(false);
+        };
+        return;
+      }
+      ApiAuthorization();
+      await api.get(`/profile/logs?page=${page}${filters}`).then((response)=>{
+        //Extra measurement to make sure db will not be requested if there's no more data in db
+        if(response.data.length==0){
+          setHasMoreLogs(false);
+        }
+        setPage(page+1);
+        setLogs([ ...logs, ...response.data]);
+        if(numLogs===0 || numLogs==logs.length){
+          setHasMoreLogs(false);
+        }
+      }).catch((err)=>{
+        alert(`Please log in to access this page: ${JSON.stringify(err.response.data.error)}`);
+        history.push('/');
+      });
+    }
+  }
+
+  async function handleEditLog(id) {
+    console.log(hasMoreLogs);
+  }
+
+  async function handleDeleteLog(id) {
+    await api.delete(`/profile/logs/${id}`).then(() => {
+      setNumLogs(numLogs-1);
+      setLogs(logs.filter((log)=>(log.id!==id)));
     }).catch((err)=>{
       console.log(err);
-      setIsFetching(false);
     });
   }
 
@@ -46,8 +80,16 @@ export default function ProfileLogs() {
         <div className="content">
           <h1>Diary Logs: {numLogs} total</h1>
           <ul>
-            {logs.map(log => (
-              <li key={log.id}>
+            <InfiniteScroll
+                pageStart={page}
+                loadMore={fetchMoreListItems}
+                hasMore={hasMoreLogs}
+                loader={hasMoreLogs ? <div className="loader" key={'loader-key'}>Loading ...</div> : ''}
+                useWindow={true}
+                threshold={5}
+            >
+              {logs.map(log => (
+                <li key={log.id}>
                   <h2>{moment(log.createdAt).format('MMMM Do YYYY')}</h2>
                   <section>
                     <p>Calorie Intake: {log.calorieIntake}</p>
@@ -59,16 +101,16 @@ export default function ProfileLogs() {
                     <p>Energy Level: {log.energyLevel}</p>
                     <p>Sleep Quality: {log.sleepQuality}</p>
                   </section>
-                  <button type="button">
+                  <button type="button" onClick={() => handleEditLog(log.id)}>
                     <FiEdit2 size={20} />
                   </button>
-                  <button type="button">
+                  <button type="button" onClick={() => handleDeleteLog(log.id)}>
                     <FiTrash2 size={20} />
                   </button>
                 </li>
-            ))}
+              ))}
+            </InfiniteScroll>
           </ul>
-          {isFetching && 'Fetching more list items...'}
         </div>
       </div>
     </div>

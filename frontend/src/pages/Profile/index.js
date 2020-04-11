@@ -5,6 +5,7 @@ import Header from '../../components/Header';
 import moment from 'moment';
 
 import api from '../../services/api';
+import ApiAuthorization from '../../services/ApiAuthorization';
 
 import './styles.css';
 
@@ -18,6 +19,7 @@ export default function Profile() {
   const history = useHistory();
 
   useEffect(() => {
+    ApiAuthorization();
     api.get('profile')
       .then(response => {
         setId(response.data.id);

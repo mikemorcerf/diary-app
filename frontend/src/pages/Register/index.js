@@ -3,6 +3,7 @@ import { Link, useHistory } from 'react-router-dom';
 import { FiChevronLeft } from 'react-icons/fi';
 
 import api from '../../services/api';
+import ApiAuthorization from '../../services/api';
 
 import logoImg from '../../assets/lightLogo.png';
 
@@ -29,7 +30,8 @@ export default function Register() {
       .then(async()=>{
         await api.post('authenticate', { email, password })
         .then((response) => {
-          api.defaults.headers.common['Authorization'] = `Bearer ${response.data.token}`;
+          localStorage.setItem('AuthorizationToken',`Bearer ${response.data.token}`);
+          ApiAuthorization();
           history.push('/profile');
         })
         .catch((err)=>{

@@ -24,7 +24,8 @@ export default function Login () {
 
     await api.post('authenticate', data)
       .then((response)=>{
-        api.defaults.headers.common['Authorization'] = `Bearer ${response.data.token}`;
+        localStorage.setItem('AuthorizationToken',`Bearer ${response.data.token}`);
+        api.defaults.headers.common['Authorization'] = localStorage.getItem('AuthorizationToken');
         history.push('/profile');
       })
       .catch((err)=>{
