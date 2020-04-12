@@ -1,3 +1,14 @@
+form input:not(.range-slide) {
+  height: 30px;
+  max-width: 100px;
+}
+select {
+  width: 100%;
+}
+.range-slide {
+  padding: 0;
+}
+
 .profile-logs-container {
   width: 100%;
   max-width: 1120px;
@@ -14,7 +25,6 @@
   background-color: var(--lightPurpleColor);
   box-shadow: 0 0 100px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
-  display: inline-block;
 }
 
 .profile-logs-container .content h1 {
@@ -68,4 +78,189 @@
 
 .profile-logs-container .content li section p {
   font-weight: 700;
+}
+
+.profile-logs-container .filter-box {
+  padding: 20px;
+  margin-bottom: 10px;
+  background-color: var(--purpleColor);
+  width: 100%;
+  border-radius: 8px;
+}
+
+.profile-logs-container .filter-box .filter-form {
+  display: grid;
+  text-align: center;
+  font-weight: 700;
+  grid-template-columns: repeat(2, 1fr);
+  justify-content: center;
+  align-content: center;
+}
+
+.profile-logs-container .filter-box .filter-form .filter-group-one {
+  grid-column: 1/2;
+  display: block;
+}
+
+.profile-logs-container .filter-box .filter-form .filter-group-two {
+  grid-column: 2/3;
+  display: block;
+}
+
+.profile-logs-container .filter-box .filter-form .filter-group-one .filter-item-calorie-intake {
+  display: grid;
+  grid-template-areas: "t t t"
+                       "c f i";
+}
+
+.profile-logs-container .filter-box .filter-form .filter-group-one .filter-item-calorie-intake .filter-tag {
+  grid-area: t;
+}
+
+.profile-logs-container .filter-box .filter-form .filter-group-one .filter-item-calorie-intake #calorie-intake-checkbox {
+  grid-area: c;
+  margin-left: 20px;
+}
+
+.profile-logs-container .filter-box .filter-form .filter-group-one .filter-item-calorie-intake #calorie-intake-dropdown {
+  grid-area: f;
+  justify-self: center;
+}
+
+.profile-logs-container .filter-box .filter-form .filter-group-one .filter-item-calorie-intake #calorie-intake-text {
+  grid-area: i;
+  justify-self: center;
+}
+
+.profile-logs-container .filter-box .filter-form .filter-group-one .filter-item-exercise-time {
+  display: grid;
+  grid-template-areas: "t t t t"
+                       "c f h m";
+}
+
+.profile-logs-container .filter-box .filter-form .filter-group-one .filter-item-exercise-time .filter-tag {
+  grid-area: t;
+}
+
+.profile-logs-container .filter-box .filter-form .filter-group-one .filter-item-exercise-time #exercise-time-checkbox {
+  grid-area: c;
+  margin-left: 20px;
+}
+
+.profile-logs-container .filter-box .filter-form .filter-group-one .filter-item-exercise-time #exercise-time-dropdown {
+  grid-area: f;
+  justify-self: center;
+}
+
+.profile-logs-container .filter-box .filter-form .filter-group-one .filter-item-exercise-time #exercise-time-hour-text {
+  grid-area: h;
+  justify-self: center;
+}
+
+.profile-logs-container .filter-box .filter-form .filter-group-one .filter-item-exercise-time #exercise-time-minute-text {
+  grid-area: m;
+  justify-self: center;
+}
+
+.profile-logs-container .filter-box .filter-form .filter-group-two .filter-item-mood {
+  display: grid;
+  grid-template-areas: "t t t t"
+                       "c m m m";
+}
+
+.profile-logs-container .filter-box .filter-form .filter-group-two .filter-item-mood .filter-tag {
+  grid-area: t;
+}
+
+.profile-logs-container .filter-box .filter-form .filter-group-two .filter-item-mood #mood-checkbox {
+  grid-area: c;
+  margin-left: 40px;
+}
+
+.profile-logs-container .filter-box .filter-form .filter-group-two .filter-item-mood #mood-dropdown {
+  grid-area: m;
+  justify-self: center;
+}
+
+.profile-logs-container .filter-box .filter-form .filter-group-two .filter-item-vitamin-taken {
+  display: grid;
+  grid-template-areas: "t t t t"
+                       "c v v v";
+}
+
+.profile-logs-container .filter-box .filter-form .filter-group-two .filter-item-vitamin-taken .filter-tag {
+  grid-area: t;
+}
+
+.profile-logs-container .filter-box .filter-form .filter-group-two .filter-item-vitamin-taken #vitamin-taken-checkbox {
+  grid-area: c;
+  margin-left: 40px;
+}
+
+.profile-logs-container .filter-box .filter-form .filter-group-two .filter-item-vitamin-taken #vitamin-taken-dropdown {
+  grid-area: v;
+}
+
+.profile-logs-container .filter-box .filter-form .filter-group-two .filter-item-energy-level {
+  display: grid;
+  grid-template-areas: "t t t t"
+                       "c s s s";
+}
+
+.profile-logs-container .filter-box .filter-form .filter-group-two .filter-item-energy-level .filter-tag {
+  grid-area: t;
+}
+
+.profile-logs-container .filter-box .filter-form .filter-group-two .filter-item-energy-level #energy-level-checkbox {
+  grid-area: c;
+  margin-left: 40px;
+}
+
+.profile-logs-container .filter-box .filter-form .filter-group-two .filter-item-energy-level #energy-level-range {
+  grid-area: s;
+}
+
+.profile-logs-container .filter-box .filter-form .filter-group-one .filter-item-sleep-quality {
+  display: grid;
+  grid-template-areas: "t t t t"
+                       "c s s s";
+}
+
+.profile-logs-container .filter-box .filter-form .filter-group-one .filter-item-sleep-quality .filter-tag {
+  grid-area: t;
+}
+
+.profile-logs-container .filter-box .filter-form .filter-group-one .filter-item-sleep-quality #sleep-quality-checkbox {
+  grid-area: c;
+  margin-left: 20px;
+}
+
+.profile-logs-container .filter-box .filter-form .filter-group-one .filter-item-sleep-quality #sleep-quality-range {
+  grid-area: s;
+}
+
+@media (max-width:900px) {
+  form input:not(.range-slide) {
+    height: 30px;
+    max-width: 55px;
+  }
+
+  .profile-logs-container .filter-box .filter-form {
+    display: block;
+    text-align: center;
+    font-weight: 700;
+    justify-content: center;
+    align-content: center;
+  }
+
+  .profile-logs-container .filter-box .filter-form .filter-group-two .filter-item-mood #mood-checkbox {
+    margin-left: 20px;
+  }
+
+  .profile-logs-container .filter-box .filter-form .filter-group-two .filter-item-vitamin-taken #vitamin-taken-checkbox {
+    margin-left: 20px;
+  }
+  .profile-logs-container .filter-box .filter-form .filter-group-two .filter-item-energy-level #energy-level-checkbox {
+    margin-left: 20px;
+  }
 }
