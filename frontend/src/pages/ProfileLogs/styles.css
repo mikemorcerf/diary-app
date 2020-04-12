@@ -1,9 +1,9 @@
-form input:not(.range-slide) {
+.profile-logs-container form input:not(.range-slide) {
   height: 30px;
   max-width: 100px;
   padding: 0 3px;
 }
-select {
+.profile-logs-container select {
   width: 100%;
 }
 .range-slide {
