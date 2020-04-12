@@ -45,6 +45,7 @@ export default function ProfileLogs() {
       ApiAuthorization();
       await api.get(`/profile/logs?page=${page}${filters}`).then((response)=>{
         //Extra measurement to make sure db will not be requested if there's no more data in db
+        document.getElementById('profile-logs-container').style.color = 'red';
         if(response.data.length==0){
           setHasMoreLogs(false);
         }
@@ -73,6 +74,14 @@ export default function ProfileLogs() {
     });
   }
 
+  async function handleFilterChange(e) {
+    console.log(e);
+  }
+
+  function missingInputAlert(){
+    alert('Please fill in input fields for this filter in order to use it');
+  }
+
   return (
     <div>
       <Header />
@@ -80,37 +89,84 @@ export default function ProfileLogs() {
         <div className="content">
           <h1>Filters:</h1>
           <div className="filter-box">
-            <form action="" className="filter-form">
+            <form className="filter-form">
               <section className="filter-group-one">
                 <div className="filter-item-calorie-intake">
                   <span className="filter-tag">Calorie Intake</span>
-                  <input type="checkbox" id="calorie-intake-checkbox" />
+                  <input type="checkbox" id="calorie-intake-checkbox" onChange={e => {
+                    if(document.getElementById('calorie-intake-text').value==''){
+                      document.getElementById('calorie-intake-checkbox').checked = false;
+                      missingInputAlert();
+                    } else if((document.getElementById('calorie-intake-text').value<0.1)||(document.getElementById('calorie-intake-text').value>35000.0)){
+                      document.getElementById('calorie-intake-checkbox').checked = false;
+                      document.getElementById('calorie-intake-text').value = 0;
+                      alert('You must choose a value between 0.1 and 35,000.0');
+                    } else {
+                    handleFilterChange({
+                      title: 'calorie',
+                      check: document.getElementById('calorie-intake-checkbox').checked,
+                      calorieIntakeFilter: document.getElementById('calorie-intake-text').value,
+                      calorieIntakeFilterType: document.getElementById('calorie-intake-dropdown').value
+                  })}}}/>
                   <select id="calorie-intake-dropdown">
                     <option value="lte">Less than or equal</option>
                     <option value="gte">Greater than or equal</option>
                   </select>
-                  <input type="text" id="calorie-intake-text" />
+                  <input type="number" id="calorie-intake-text" min="0.1" max="35000.0" />
                 </div>
                 <div className="filter-item-exercise-time">
                   <span className="filter-tag">Exercise Time (hours - minutes)</span>
-                  <input type="checkbox" id="exercise-time-checkbox" />
+                  <input type="checkbox" id="exercise-time-checkbox" onChange={e => {
+                  if(document.getElementById('exercise-time-hour-text').value=='' ||
+                     document.getElementById('exercise-time-minute-text').value==''){
+                    document.getElementById('exercise-time-checkbox').checked = false;
+                    missingInputAlert();
+                  } else if(document.getElementById('exercise-time-hour-text').value<0 || document.getElementById('exercise-time-hour-text').value>23){
+                    document.getElementById('exercise-time-hour-text').value = 0;
+                    document.getElementById('exercise-time-checkbox').checked = false;
+                    alert("invalid hour value");
+                  } else if(document.getElementById('exercise-time-minute-text').value<0 || document.getElementById('exercise-time-minute-text').value>59){
+                    document.getElementById('exercise-time-minute-text').value = 0;
+                    document.getElementById('exercise-time-checkbox').checked = false;
+                    alert("invalid minute value");
+                  } else {
+                    handleFilterChange({
+                      title: 'exercise',
+                      check: document.getElementById('exercise-time-checkbox').checked,
+                      exerciseTimeFilter: (parseFloat(document.getElementById('exercise-time-hour-text').value) + parseFloat(document.getElementById('exercise-time-minute-text').value/60) ),
+                      exerciseTimeFilterType: document.getElementById('exercise-time-dropdown').value
+                    })
+                  }}}/>
                   <select id="exercise-time-dropdown">
                     <option value="lte">Less than or equal</option>
                     <option value="gte">Greater than or equal</option>
                   </select>
-                  <input type="text" id="exercise-time-hour-text" min="0" max="23" />
-                  <input type="text" id="exercise-time-minute-text" min="0" max="59" />
+                  <input type="number" id="exercise-time-hour-text" min="0" max="23" />
+                  <input type="number" id="exercise-time-minute-text" min="0" max="59" />
                 </div>
                 <div className="filter-item-sleep-quality">
                   <span className="filter-tag">Sleep Quality</span>
-                  <input type="checkbox" id="sleep-quality-checkbox" />
+                  <input type="checkbox" id="sleep-quality-checkbox" onChange={e => 
+                    handleFilterChange({
+                      title: 'sleep',
+                      check: document.getElementById('sleep-quality-checkbox').checked,
+                      sleepQualityFilterType: 'lte',
+                      sleepQualityFilter: document.getElementById('sleep-quality-range').value
+                    })
+                  }/>
                   <input type="range" className="range-slide" id="sleep-quality-range" min="1" max="5" />
                 </div>
               </section>
               <section className="filter-group-two">
                 <div className="filter-item-vitamin-taken">
                   <span className="filter-tag">Vitamin Taken?</span>
-                  <input type="checkbox" id="vitamin-taken-checkbox" />
+                  <input type="checkbox" id="vitamin-taken-checkbox" onChange={e => 
+                    handleFilterChange({
+                      title: 'vitamin',
+                      check: document.getElementById('vitamin-taken-checkbox').checked,
+                      vitaminTakenFilter: document.getElementById('vitamin-taken-dropdown').value
+                    })
+                  }/>
                   <select id="vitamin-taken-dropdown">
                     <option value="true">Yes</option>
                     <option value="false">No</option>
