@@ -1,12 +1,28 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Header from '../../components/Header';
 import { Form } from 'react-bootstrap';
+
+import api from '../../services/api';
+import ApiAuthorization from '../../services/ApiAuthorization';
 
 import Emoji from '../../components/Emoji';
 
 import './styles.css';
 
 export default function EditLog() {
+  const [moodFilter, setMoodFilter] = useState('');
+  const [exerciseTimeFilter, setExerciseTimeFilter] = useState('');
+  const [vitaminTakenFilter, setVitaminTakenFilter] = useState('');
+  const [energyLevelFilter, setEnergyLevelFilter] = useState('');
+  const [sleepQualityFilter, setSleepQualityFilter] = useState('');
+  const [calorieIntakeFilter, setCalorieIntakeFilter] = useState('');
+  const [createdAt, setCreatedAt] = useState('');
+
+  useEffect(() => {
+    ApiAuthorization();
+
+  }, []);
+
   return(
     <div>
       <Header />
@@ -32,11 +48,11 @@ export default function EditLog() {
             </div>
             <div className="energy-input label-box">
               <div className="label">Energy level:</div>
-              <Form.Control controlId="energy-range" className="input-field" style={{border:'none', marginTop:'15px'}} type="range" custom min={1} max={5} />
+              <Form.Control id="energy-range" className="input-field" style={{border:'none', marginTop:'15px'}} type="range" custom min={1} max={5} />
             </div>
             <div className="sleep-input label-box">
               <div className="label">Sleep quality:</div>
-              <Form.Control controlId="sleep-range" className="input-field" style={{border:'none', marginTop:'15px'}} type="range" custom min={1} max={5} />
+              <Form.Control id="sleep-range" className="input-field" style={{border:'none', marginTop:'15px'}} type="range" custom min={1} max={5} />
             </div>
             <div className="mood-input label-box">
               <div className="label">Mood <Emoji symbol="😄" label="happy"/></div>
