@@ -56,6 +56,9 @@ routes.post('/reset_password', celebrate({
 
 // Routes to Logs
 routes.get('/profile/logs', celebrate({
+  [Segments.HEADERS]: Joi.object({
+    authorization: Joi.string().required(),
+  }).unknown(),
   [Segments.QUERY]: Joi.object().keys({
     page: Joi.number().min(1).required(),
     moodFilter: Joi.string().min(3).max(7),
@@ -73,7 +76,19 @@ routes.get('/profile/logs', celebrate({
   })
 }), LogController.index);
 
+routes.get('/profile/logs/:id', celebrate({
+  [Segments.HEADERS]: Joi.object({
+    authorization: Joi.string().required(),
+  }).unknown(),
+  [Segments.PARAMS]: Joi.object().keys({
+    id: Joi.number().required(),
+  })
+}), LogController.fetchLog);
+
 routes.post('/profile/logs', celebrate({
+  [Segments.HEADERS]: Joi.object({
+    authorization: Joi.string().required(),
+  }).unknown(),
   [Segments.BODY]: Joi.object().keys({
     calorieIntake: Joi.number().required().min(0.1).max(35000.0),
     exerciseTime: Joi.number().required().min(0.001).max(24.0),
@@ -85,12 +100,18 @@ routes.post('/profile/logs', celebrate({
 }), LogController.create);
 
 routes.delete('/profile/logs/:id', celebrate({
+  [Segments.HEADERS]: Joi.object({
+    authorization: Joi.string().required(),
+  }).unknown(),
   [Segments.PARAMS]: Joi.object().keys({
     id: Joi.number().required(),
   })
 }), LogController.delete);
 
 routes.put('/profile/logs/:id', celebrate({
+  [Segments.HEADERS]: Joi.object({
+    authorization: Joi.string().required(),
+  }).unknown(),
   [Segments.PARAMS]: Joi.object().keys({
     id: Joi.number().required(),
   }),

@@ -181,7 +181,29 @@ module.exports = {
     return res.json(rows);
   },
 
+  async fetchLog(req, res) {
+    const { userId } = req;
+    const { id } = req.params;
 
+    try{
+      const logToFetch = await Log.findOne({
+        attributes: { exclude: ['UserId'] },
+        where: {
+          userId: userId,
+          id: id,
+        },
+      });
+
+      if(!logToFetch){
+        return res.status(400).json({error:'Record not found, or user does not have permission to edit this record.'});
+      }
+
+      return res.json(logToFetch);
+
+    } catch (err) {
+      return res.status(400).json({error:'Error fetching log entry.'});
+    }
+  },
 
   async create(req, res) {
     const { userId } = req;

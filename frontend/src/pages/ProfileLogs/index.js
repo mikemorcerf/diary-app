@@ -60,7 +60,7 @@ export default function ProfileLogs() {
   }
 
   async function handleEditLog(id) {
-    history.push(`/profile/logs/update/${id}`);
+    history.push(`/profile/logs/update/${id}`, id={id});
   }
 
   async function handleDeleteLog(id) {
