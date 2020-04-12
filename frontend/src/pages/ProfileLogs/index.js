@@ -25,7 +25,6 @@ export default function ProfileLogs() {
   const history = useHistory();
 
   useEffect(()=>{
-    console.log('UUUUSE EFFECTTTTTTTTTTT!!!!!!');
     setPage(1);
     ApiAuthorization();
     api.get(`/profile/logs?page=${pagePagination}`).then((response)=>{
@@ -44,22 +43,7 @@ export default function ProfileLogs() {
       setAllowFetch(false);
       ApiAuthorization();
       await api.get(`/profile/logs?page=${pagePagination}${moodFilter}${exerciseTimeFilter}${vitaminTakenFilter}${energyLevelFilter}${sleepQualityFilter}${calorieIntakeFilter}`).then((response)=>{
-        //Extra measurement to make sure db will not be requested if there's no more data in db
-        console.log(`/profile/logs?page=${pagePagination}${moodFilter}${exerciseTimeFilter}${vitaminTakenFilter}${energyLevelFilter}${sleepQualityFilter}${calorieIntakeFilter}`);
         //If all items are loaded, do not fetch items anymore
-        console.log(`FETCH ITEEEEEMMMMMMSSSSSSSSSSS,
-        page ${pagePagination},
-        logs ${logs},
-        numLogs ${numLogs},
-        hasMoreLogs ${hasMoreLogs},
-        allowFetch ${allowFetch},
-        moodFilter ${moodFilter},
-        exerciseTimeFilter ${exerciseTimeFilter},
-        vitaminTakenFilter ${vitaminTakenFilter},
-        energyLevelFilter ${energyLevelFilter},
-        sleepQualityFilter ${sleepQualityFilter},
-        calorieIntakeFilter ${calorieIntakeFilter}
-        `);
         if(response.data.length==0){
           setHasMoreLogs(false);
         } else {
@@ -71,8 +55,8 @@ export default function ProfileLogs() {
         alert(`Please log in to access this page: ${JSON.stringify(err)}`);
         history.push('/');
       });
+      setAllowFetch(true);
     }
-    setAllowFetch(true);
   }
 
   async function handleEditLog(id) {
