@@ -17,7 +17,7 @@ export default function Routes() {
         <Route path="/profile" exact component={Profile} />
         <Route path="/profile/logs" exact component={ProfileLogs} />
         <Route path="/profile/logs/new" component={NewLog} />
-        <Route path="/profile/logs/update/:id" component={EditLog} />
+        <Route path="/profile/logs/update/:logId" component={EditLog} />
       </Switch>
     </BrowserRouter>
   );
