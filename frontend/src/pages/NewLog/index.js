@@ -40,10 +40,10 @@ export default function NewLog() {
             <div className="mood-input label-box">
               <div className="label">Mood <Emoji symbol="😄" label="happy"/></div>
               <Form.Control as="select" className="input-field" custom>
-                <option>Happy</option>
-                <option>Calm</option>
-                <option>Sad</option>
-                <option>Annoyed</option>
+                <option>happy</option>
+                <option>calm</option>
+                <option>sad</option>
+                <option>annoyed</option>
               </Form.Control>
             </div>
             <button className="button" type="submit" >Save</button>

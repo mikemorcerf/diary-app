@@ -4,6 +4,8 @@ import Header from '../../components/Header';
 import { FiTrash2, FiEdit2 } from 'react-icons/fi';
 import moment from 'moment';
 import InfiniteScroll from 'react-infinite-scroller';
+
+import Emoji from '../../components/Emoji';
 import ApiAuthorization from '../../services/ApiAuthorization';
 import api from '../../services/api';
 
@@ -27,7 +29,7 @@ export default function ProfileLogs() {
   useEffect(()=>{
     setPage(1);
     ApiAuthorization();
-    api.get(`/profile/logs?page=${pagePagination}`).then((response)=>{
+    api.get('/profile/logs?page=1').then((response)=>{
       setPage(2);
       setLogs(response.data);
       setNumLogs(response.headers['x-total-count']);
@@ -36,7 +38,7 @@ export default function ProfileLogs() {
       alert(`Please log in to access this page: ${JSON.stringify(err)}`);
       history.push('/');
     });
-  },[]);
+  },[history]);
 
   async function fetchMoreListItems() {
     if(allowFetch && hasMoreLogs){
@@ -308,7 +310,7 @@ export default function ProfileLogs() {
                   <section>
                     <p>Calorie Intake: {log.calorieIntake}</p>
                     <p>Exercise Time: {Math.floor(log.exerciseTime)} hours and {Math.floor((log.exerciseTime%1)*60)} minutes</p>
-                    <p>Mood: {log.mood}</p>
+                    <p>Mood: {log.mood} <Emoji symbol={log.mood} label={log.mood}/></p>
                   </section>
                   <section>
                     <p>Vitamin Taken: {log.vitaminTaken ? 'yes' : 'no'}</p>
