@@ -60,7 +60,7 @@ export default class EditLog extends React.Component {
                   <input type="number" min="0" max="59" className="input-field" defaultValue={parseInt((this.state.exerciseTime%1)*60)} />
                 </div>
                 <div className="calory-input label-box">
-                  <div className="label">Calory Intake:</div>
+                  <div className="label">Calorie Intake:</div>
                   <input type="number" min="0.1" max="35000.0" className="input-field" defaultValue={this.state.calorieIntake} />
                 </div>
                 <div className="vitamin-input label-box">
