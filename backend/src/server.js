@@ -3,6 +3,9 @@
 // LinkedIn: https://www.linkedin.com/in/michaelmoura/
 // Github: https://github.com/mikemorcerf
 
+// load all env variables from .env file into process.env object.
+require('dotenv').config();
+
 const express = require('express');
 const cors = require('cors');
 
