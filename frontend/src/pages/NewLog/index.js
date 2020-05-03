@@ -68,11 +68,11 @@ export default function NewLog() {
             </div>
             <div className="energy-input label-box">
               <div className="label">Energy level:</div>
-              <Form.Control controlId="energy-range" onChange={event => setEnergyLevel(event.target.value)} className="input-field" style={{border:'none', marginTop:'15px'}} type="range" custom min={1} max={5} />
+              <Form.Control id="energy-range" onChange={event => setEnergyLevel(event.target.value)} className="input-field" style={{border:'none', marginTop:'15px'}} type="range" custom min={1} max={5} />
             </div>
             <div className="sleep-input label-box">
               <div className="label">Sleep quality:</div>
-              <Form.Control controlId="sleep-range" onChange={event => setSleepQuality(event.target.value)} className="input-field" style={{border:'none', marginTop:'15px'}} type="range" custom min={1} max={5} />
+              <Form.Control id="sleep-range" onChange={event => setSleepQuality(event.target.value)} className="input-field" style={{border:'none', marginTop:'15px'}} type="range" custom min={1} max={5} />
             </div>
             <div className="mood-input label-box">
               <div className="label">Mood <Emoji symbol={mood} label={mood} /></div>

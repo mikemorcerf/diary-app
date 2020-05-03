@@ -44,6 +44,8 @@
   font-size: 18px;
   color: var(--textColor);
   line-height: 32px;
+  margin: 0;
+  line-height: 22px;
 }
 
 @media (max-width:800px) {
