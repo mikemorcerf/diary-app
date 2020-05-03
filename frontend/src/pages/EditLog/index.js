@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
+import { useHistory } from 'react-router-dom';
 import Header from '../../components/Header';
 import { Form } from 'react-bootstrap';
 import moment from 'moment';
@@ -23,6 +24,8 @@ export default function EditLog({ match }) {
   const [sleepQuality, setSleepQuality] = useState(0);
   const [calorieIntake, setCalorieIntake] = useState(0.0);
   const [createdAt, setCreatedAt] = useState('');
+
+  const history = useHistory();
 
   useEffect(()=>{
     setLogId(match.params.logId);
@@ -61,10 +64,11 @@ export default function EditLog({ match }) {
     ApiAuthorization();
     api.put(`/profile/logs/${logId}`, data).then(()=>{
       alert('You successfully updated your log');
+      history.push('/profile/logs');
     }).catch((err)=>{
       alert(JSON.stringify(err.response.data.error));
     });
-  },[calorieIntake, energyLevel, exerciseTime, hoursExercising, logId, minutesExercising, mood, sleepQuality, vitaminTaken]);
+  },[calorieIntake, energyLevel, exerciseTime, history, hoursExercising, logId, minutesExercising, mood, sleepQuality, vitaminTaken]);
 
   return(logDataRetrievedFromServer && (
     <div>
