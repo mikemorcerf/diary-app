@@ -87,11 +87,11 @@ export default function EditLog({ match }) {
             </div>
             <div className="calory-input label-box">
               <div className="label">Calorie Intake:</div>
-              <input type="number" min="0.00" max="35000.00" onChange={event => setCalorieIntake(event.target.value)} className="input-field" defaultValue={calorieIntake} />
+              <input type="number" min="0" max="35000" onChange={event => setCalorieIntake(event.target.value)} className="input-field" defaultValue={calorieIntake} />
             </div>
             <div className="vitamin-input label-box">
               <div className="label">Vitamin Taken?</div>
-              <Form.Check type="switch" onChange={event => setVitaminTaken(event.target.value)} className="input-field" id="vitamin-switch" style={{marginTop:'10px'}} label="" defaultValue={vitaminTaken ? true : false} />
+              <Form.Check type="switch" onChange={event => setVitaminTaken(!vitaminTaken)} className="input-field" id="vitamin-switch" style={{marginTop:'10px'}} label="" checked={vitaminTaken} />
             </div>
             <div className="energy-input label-box">
               <div className="label">Energy level:</div>

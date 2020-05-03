@@ -60,11 +60,11 @@ export default function NewLog() {
             </div>
             <div className="calory-input label-box">
               <div className="label">Calorie Intake:</div>
-              <input type="number" min="0.1" max="35000.0" onChange={event => setCalorieIntake(event.target.value)} defaultValue={0} className="input-field" />
+              <input type="number" min="1" max="35000" onChange={event => setCalorieIntake(event.target.value)} defaultValue={0} className="input-field" />
             </div>
             <div className="vitamin-input label-box">
               <div className="label">Vitamin Taken?</div>
-              <Form.Check type="switch" className="input-field" onChange={event => setVitaminTaken(event.target.value)} id="vitamin-switch" style={{marginTop:'10px'}} label="" />
+              <Form.Check type="switch" className="input-field" onChange={event => setVitaminTaken(!vitaminTaken)} checked={vitaminTaken} id="vitamin-switch" style={{marginTop:'10px'}} label="" />
             </div>
             <div className="energy-input label-box">
               <div className="label">Energy level:</div>
