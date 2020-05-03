@@ -59,7 +59,7 @@ export default function NewLog() {
               <input type="number" min="1" max="59" onChange={event => setMinutesExercising(event.target.value)} defaultValue={0} className="input-field"/>
             </div>
             <div className="calory-input label-box">
-              <div className="label">Calory Intake:</div>
+              <div className="label">Calorie Intake:</div>
               <input type="number" min="0.1" max="35000.0" onChange={event => setCalorieIntake(event.target.value)} defaultValue={0} className="input-field" />
             </div>
             <div className="vitamin-input label-box">
