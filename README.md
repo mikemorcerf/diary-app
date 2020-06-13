@@ -82,7 +82,10 @@ $ yarn start
 
 # :feet: How to Use
 
+[Working Online Demo](https://diary-app-frontend.netlify.app/)
+</br>
 Diary App allows users to register how they felt throughout their days.
+</br>
 In order to access the platform, an user must first register on the sign up page:
 <p align="center">
    <img alt="diary app instructions picture" src="https://res.cloudinary.com/mikemoura/image/upload/v1592068061/diary-app/instructions/instructions_1_qlmce1.png"/>
